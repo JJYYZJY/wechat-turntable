@@ -1,0 +1,28 @@
+<!--miniprogram/pages/detail/detail.wxml-->
+
+<view class='content'>
+
+  <view class='title'>
+    <view>{{item.title}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>类别:</view>
+    <view class='info-text'>{{item.category}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>地址:</view>
+    <view class='info-text'>{{item.address}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>电话:</view>
+    <view class='info-text'>{{item.tel}}</view>
+  </view>
+
+  <view>
+    <button bindtap='openMap'>查看位置</button>
+  </view>
+
+</view>

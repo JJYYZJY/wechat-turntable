@@ -1,0 +1,29 @@
+/* miniprogram/pages/detail/detail.wxss */
+
+.content{
+  padding: 20rpx;
+}
+
+.title{
+  width: fit-content;
+  margin: 0px auto;
+  align-items: center;
+}
+
+.line-layout{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20rpx 10rpx;
+}
+
+.label-text{
+  width: 20%;
+  margin-right: 10rpx;
+  font-size: 40rpx;
+}
+
+.info-text{
+  width: 80%;
+  font-size: 30rpx;
+}

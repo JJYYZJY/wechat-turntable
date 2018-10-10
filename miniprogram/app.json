@@ -1,0 +1,15 @@
+{
+  "cloud": true,
+  "pages": [
+    "pages/play/play",
+    "pages/user/index",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "选择轮盘",
+    "navigationBarTextStyle": "black"
+  }
+}
