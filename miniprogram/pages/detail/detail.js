@@ -14,6 +14,7 @@ Page({
   onLoad: function (options) {
       var item = JSON.parse(options.itemJson);
       this.setData({
+        title:options.title,
         item:item
       })
   },

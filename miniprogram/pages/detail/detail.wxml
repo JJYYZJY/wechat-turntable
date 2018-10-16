@@ -12,6 +12,11 @@
   </view>
 
   <view class='line-layout'>
+    <view class='label-text'>距离:</view>
+    <view class='info-text'>{{item._distance}}米</view>
+  </view>
+
+  <view class='line-layout'>
     <view class='label-text'>地址:</view>
     <view class='info-text'>{{item.address}}</view>
   </view>
@@ -21,8 +26,11 @@
     <view class='info-text'>{{item.tel}}</view>
   </view>
 
-  <view>
-    <button bindtap='openMap'>查看位置</button>
+  <view class='line-layout'>
+    <button class='btn-open' bindtap='openMap'>查看位置</button>
   </view>
 
 </view>
+
+<view class='font-title-bg font-title-bg-style'>{{title}}</view>
+

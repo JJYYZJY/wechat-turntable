@@ -10,20 +10,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isLocaltion:false,
-    localName:'定位中',
-    localMsg:'未授权'
+    isLocaltion:true,//是否授权
+    locationStatus: 0,//0未开始，1定位成功，2定位失败
+    localName: null,//定位到的位置
+    localMsg:'未授权',//提示信息
+    searchError: false,
+    needUpdate: true,
+    newTask: {
+      type: 1,
+      id: 0,
+      name: '美食推荐，我要去吃啥？',
+      title: '美食',
+      title_key: '美食',
+      items: null,
+    },
+    task: null,
+    cacheEat: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // wx.clearStorage();
     console.log('onLoad');
     qqmapsdk = new QQMapWX({
       key: 'KNUBZ-B4XCP-P2GDZ-VHK7F-7FSSJ-M4BH4'
     });
-    
   },
 
   /**
@@ -38,62 +51,13 @@ Page({
    */
   onShow: function () {
     console.log('onShow');
-    const that = this;
-    wx.authorize({
-      scope: 'scope.userLocation',
-      success: () => {
-        if(that.data.mkrs){
-          return;
-        }
-        qqmapsdk.search({
-          keyword: '美食',
-          orderby: 'star',
-          page_size: 14,
-          success: (res) => {
-            console.log("success:", res);
-            that.setData({
-              mkrs: res.data
-            })
-            const options = that.mkr2options(res.data);
-            console.log(options);
-            that.formatOptions(options);
-          },
-          fail: (res) => {
-            console.log("fail:", res);
-          }
-        });
-        wx.getLocation({
-          type: 'gcj02',
-          success: function (res) {
-            console.log('getLocation:', res)
-            qqmapsdk.reverseGeocoder({
-              location: {
-                latitude: res.latitude,
-                longitude: res.longitude
-              },
-              success: function (res) {
-                console.log(res);
-                that.setData({
-                  localName: res.result.address
-                })
-              },
-              fail: function (res) {
-                console.log(res);
-              },
-              complete: function (res) {
-                console.log(res);
-              }
-            });
-          },
-        })
-        that.setData({
-          isLocaltion: true,
-        })
-      },
-      fail: () => {
+    if (this.data.needUpdate){
+      this.notifyCompass();
+      this.setData({
+        needUpdate: false
+      })
 
-      }
-    })
+    }
   },
 
   /**
@@ -131,30 +95,157 @@ Page({
 
   },
 
-  mkr2options: function (mkrs) {
-    var options = [];
-    mkrs.forEach((mkr)=>{
-        options.push({
-          name: mkr.title
+  notifyCompass: function () {
+    console.log('newTask',this.data.newTask);
+    if(this.data.newTask == null){
+      console.warn('notifyCompass newTask is null');
+      return;
+    }
+    const that = this;
+    const newTask = this.data.newTask;
+    this.setData({
+      newTask: null,
+      task: newTask
+    })
+    if (this.data.task.type == 1 && this.data.task.items == null) {
+      // if(this.data.cacheEat == null){
+        wx.authorize({
+          scope: 'scope.userLocation',
+          success: () => {
+            that.setData({
+              isLocaltion: true
+            })
+            if (that.data.task.items) {
+              return;
+            }
+            that.searchMap(this.data.task.title_key);
+            that.getLocationInfo();
+          },
+          fail: () => {
+            that.setData({
+              isLocaltion: false
+            })
+          }
         })
-    });
-    return options;
+        return;
+      // }else{
+      //   this.setData({
+      //     task: this.data.cacheEat
+      //   });
+      // }
+    }
+    this.initCompass();
   },
 
+  initCompass: function () {
+    var options = null;
+    if(this.data.task.type = 0){
+      options = this.mkr2options(this.data.task.items);
+    }else{
+      options = this.data.task.items;
+    }
+    console.log(options);    
+    this.formatOptions(options);
+  },
+
+  //获取位置信息
+  getLocationInfo: function () {
+    var that = this;
+    that.setData({
+      locationStatus: 0,
+      localMsg: '定位中'
+    })
+    wx.getLocation({
+      type: 'gcj02',
+      success: function (res) {
+        console.log('getLocation:', res)
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: function (res) {
+            console.log('reverseGeocoder', res);
+            that.setData({
+              locationStatus: 1,
+              localMsg: '定位成功',
+              localName: res.result.formatted_addresses.recommend
+            })
+          },
+          fail: function (res) {
+            console.log(res);
+            that.setData({
+              locationStatus: 2,
+              localMsg: '定位失败'
+            })
+          },
+          complete: function (res) {
+            console.log(res);
+          }
+        });
+      },
+    })
+  },
+
+  //poi检索附近商家
+  searchMap: function (title) {
+    console.log('searchMap keyword:',title);
+    var that = this;
+    qqmapsdk.search({
+      keyword: title,
+      orderby: 'star',
+      page_size: 14,
+      success: (res) => {
+        console.log("success:", res);
+        var task = that.data.task;
+        task.items = res.data;
+        that.setData({
+          task: task,
+          cacheEat: task
+        })
+        const options = that.mkr2options(res.data);
+        console.log(options);
+        that.formatOptions(options);
+      },
+      fail: (res) => {
+        console.log("fail:", res);
+        that.setData({
+          searchError: true
+        })
+      }
+    });
+  },
+
+  //抽取检索结果中title组成给罗盘显示
+  mkr2options: function (mkrs) {
+    mkrs.forEach((mkr)=>{
+          mkr.name= mkr.title
+    });
+    return mkrs;
+  },
+
+  //根据选项数量格式化罗盘
   formatOptions: function (options) {
     var e = this, n = options, t = n.length, i = 360 / t, s = i - 90, r = [], d = 1 / t;
-    wx.createCanvasContext("lotteryCanvas");
+    // wx.createCanvasContext("lotteryCanvas");
+    var single = t == 2 || t % 2 == 1;
     for (var o = 942.47778 / t, g = 0; g < t; g++) {
       console.log(d + ":turnNum");
       var l = colors[0];
-      if (t % 2 == 0) l = 1 == (u = g % 2) ? colors[1] : 2 == u ? colors[1] : colors[0]; else {
+      if (!single) {
         var u = g % 2;
-        l = g == t - 1 ? colors[1] : 1 == u ? colors[0] : colors[1];
+        l = 1 == u ? colors[1] : colors[0]; 
+      }else {
+        var u = g % 2;
+        l = colors[1];
       }
       var textColor = textColors[0];
-      if (t % 2 == 0) textColor = 1 == (u = g % 2) ? textColors[1] : 2 == u ? textColors[1] : textColors[0]; else {
+      if (!single) {
         var u = g % 2;
-        textColor = g == t - 1 ? textColors[1] : 1 == u ? textColors[0] : textColors[1];
+        textColor = 1 == u ? textColors[1] : textColors[0];
+      }else {
+        var u = g % 2;
+        textColor = textColors[1];
       }
       r.push({
         k: g,
@@ -172,6 +263,7 @@ Page({
       });
     }
     e.setData({
+      single: single,
       awardsLen: r.length,
       awardsList: r
     });
@@ -182,8 +274,9 @@ Page({
 
   },
 
+  //随机转动罗盘
   getLottery: function () {
-    var e = this, t = 14;
+    var e = this, t = this.data.task.items.length;
     console.log("len:" + t);
     var i = Math.random() * t >>> 0;
     a.runDegs = a.runDegs || 0, console.log("deg", a.runDegs), a.runDegs = a.runDegs + (360 - a.runDegs % 360) + (2160 - i * (360 / t)),
@@ -192,18 +285,37 @@ Page({
       duration: 4e3,
       timingFunction: "ease"
     });
-    e.animationRun = s, s.rotate(a.runDegs).step(), e.setData({
+    e.animationRun = s;
+    s.rotate(a.runDegs).step();
+    e.setData({
       animationData: s.export(),
       btnDisabled: "disabled",
       sliderDisabled: "disabled"
-    }), setTimeout(function () {
+    });
+    setTimeout(function () {
       e.setData({
         btnDisabled: "",
         sliderDisabled: "",
         itemIndex: i,
-        currentItem: e.data.mkrs[i],
-        itemJson: JSON.stringify(e.data.mkrs[i])
+        currentItem: e.data.task.items[i],
+        itemJson: JSON.stringify(e.data.task.items[i])
       });
+      console.log(e.data.currentItem);
     }, 4e3);
   },
+
+  showMore: function() {
+    wx.navigateTo({
+      url: '../compass-list/index',
+    })
+  },
+
+  gotoDetail: function() {
+    if(this.data.task.type == 0){
+      return;
+    }
+    wx.navigateTo({
+      url: '../detail/detail?itemJson='+this.data.itemJson+'&title='+this.data.task.title,
+    })
+  }
 })

@@ -1,7 +1,20 @@
 /**app.wxss**/
+
+@import "./assets/font/love.wxss";
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
 } 
+
+page {
+    background: #935854;
+}
+
+.font-title-bg-style{
+  color: #FEFFFA;
+  font-size: 300rpx;
+  opacity: 0.1;
+}

@@ -9,7 +9,7 @@ exports.main = async (event, context) => {
   console.log('context', context);
   return new Promise((res,rej)=>{
     try{
-      request('http://www.baidu.com',(err,resp,body)=>{
+      request('http://api.douban.com/v2/movie/top250?start=0&count=250',(err,resp,body)=>{
         if(err){
           return rej(err)
         }

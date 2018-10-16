@@ -1,0 +1,37 @@
+/* miniprogram/pages/compass-new/index.wxss */
+page{
+  color: #FEFFFA;
+}
+
+.line-layout{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 30rpx 40rpx;
+}
+
+.line-label{
+  width: 20%;
+  margin-right: 10rpx;
+  font-size: 40rpx;
+}
+
+.line-info{
+  width: 80%;
+  font-size: 30rpx;
+}
+
+.btn-style{
+  margin: 20rpx 40rpx;
+  background-color: #FD6592;
+  color: #FEFFFA;
+  box-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+
+.btn-style-low{
+  width: fit-content;
+  margin: 0rpx 40rpx;
+  background-color: #FD6592;
+  color: #FEFFFA;
+  box-shadow: 0 1px 1px rgba(0,0,0,.4);
+}

@@ -18,7 +18,7 @@ Page({
           b:3
         }
     }).then(res => {
-        console.log('success',res);
+      console.log('success', JSON.parse(res.result));
     }).catch(err=>{
         console.log('error',err);
     });

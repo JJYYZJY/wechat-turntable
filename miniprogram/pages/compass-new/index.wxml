@@ -1,0 +1,19 @@
+<!--miniprogram/pages/compass-new/index.wxml-->
+<view>
+  <view class='line-layout'>
+    <text class='line-label'>名称</text>
+    <input class='line-info' type='text' value='{{task.name}}' bindinput='bindInputTitle' focus='true' placeholder="输入轮盘名称"></input>
+  </view>
+  <view class='line-layout' wx:for='{{task.items}}' wx:key='id'>
+    <text class='line-label'>选项{{index+1}}</text>
+    <input class='line-info' type='name' value='{{item.name}}' bindinput='bindKeyInput' data-index='{{index}}' placeholder='输入选项'></input>
+  </view>
+  <view>
+    <view class='line-layout'>
+      <button class='btn-style-low' bindtap='addItem'>增加选项</button>
+      <button class='btn-style-low' bindtap='delItem'>删除选项</button>
+    </view>
+    <button class='btn-style' bindtap='saveTask'>创建罗盘</button>
+  </view>
+</view>
+<i-message id="message" />

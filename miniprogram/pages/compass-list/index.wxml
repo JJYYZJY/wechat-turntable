@@ -1,0 +1,18 @@
+<!--miniprogram/pages/compass-list/index.wxml-->
+<view class='title'>智能推荐</view>
+<view class='weui-flex'>
+  <view class='weui-flex__item goto-layout' wx:for='{{tasks_recommend}}' wx:key='unique' bindtap='selectRecommendTitle' data-index='{{index}}'>
+      {{item.name}}
+  </view>
+</view>
+<view class='title'>我创建的</view>
+<view class='weui-flex'>
+  <view class='weui-flex__item goto-layout' wx:for='{{tasks_my}}' wx:key='unique' bindtap='selectDiyTitle' data-index='{{index}}' bindlongpress='longClick'>
+      {{item.name}}
+  </view>
+</view>
+<view>
+  <button class='btn-style' bindtap='addCompass'>增加罗盘</button>
+</view>
+<i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" />
+<i-message id="message" />

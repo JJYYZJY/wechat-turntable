@@ -2,7 +2,32 @@
 
 page {
     background: #935854;
-    padding-top: 30rpx;
+}
+
+.compass-name-layout {
+  margin: 0px auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  width:  fit-content;
+  color: #FD6592;  
+}
+
+.alert-layout{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60rpx 60rpx;
+  color: #FEFFFA;
+}
+
+.btn-setting{
+  width: 100%;  
+  background-color: #FD6592;
+  margin-top: 20rpx;
+  color: #FEFFFA;
+  box-shadow: 0 1px 1px rgba(0,0,0,.4);
 }
 
 .location-layout{
@@ -15,11 +40,11 @@ page {
     margin-top: 10rpx;
     color: #FEFFFA;
     font-size: 28rpx;
-    text-shadow: 0 1px 0px rgba(0,0,0,.6);
+    text-shadow: 0 1px 0px rgba(0,0,0,.2);
 }
 
 .canvas-layout{
-    margin: 100rpx 4rpx 60rpx 4rpx;
+    margin: 20% 4rpx 10% 4rpx;
 }
 
 .goto-layout{
@@ -188,7 +213,7 @@ page {
     top: 0;
     width: 2px;
     height: 150px;
-    background-color: rgba(228,55,14,.4);
+    background-color: #FD6592;
     transform-origin: 50% 150px;
 }
 
@@ -205,7 +230,7 @@ page {
     line-height: 60px;
     text-align: center;
     font-size: 20px;
-    text-shadow: 0 1px 0px rgba(0,0,0,.6);
+    text-shadow: 0 1px 0px rgba(0,0,0,.2);
     box-shadow: 0 3px 5px rgba(0,0,0,.6);
     text-decoration: none;
 }
@@ -269,4 +294,23 @@ page {
     font-weight: bold;
     text-align: center;
     padding: 20rpx;
+}
+
+.btn-add {
+  position: fixed;
+  bottom: 80rpx;
+  right: 80rpx;
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  align-content: center;
+  text-decoration: none;
+  z-index: 400;
+  border-radius: 50%;
+  color: #FEFFFA;
+  background-color: rgb(219, 88, 127);
+  line-height: 48px;
+  font-size: 20px;
+  box-shadow: 0 3px 5px rgba(0,0,0,.6);
+  
 }

@@ -2,6 +2,7 @@
 
 .content{
   padding: 20rpx;
+  color: #FEFFFA;
 }
 
 .title{
@@ -14,7 +15,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 20rpx 10rpx;
+  margin: 60rpx 60rpx;
 }
 
 .label-text{
@@ -26,4 +27,11 @@
 .info-text{
   width: 80%;
   font-size: 30rpx;
+}
+
+.btn-open{
+  width: 100%;
+  background-color: #FD6592;
+  color: #FEFFFA;
+  box-shadow: 0 1px 1px rgba(0,0,0,.4);
 }
