@@ -1,0 +1,37 @@
+<!--miniprogram/pages/movie-info/index.wxml-->
+<view class='content'>
+
+  <view class='title'>
+    <view>{{item.title}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>评分:</view>
+    <view class='info-text'>{{item.rating.average}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>类型:</view>
+    <view class='info-text'>{{item.genres}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>日期:</view>
+    <view class='info-text'>{{item.year}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>导演:</view>
+    <view class='info-text'>{{item.directors[0].name}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>演员:</view>
+    <view class='info-text'>
+      <view wx:for='{{item.casts}}' wx:key='unique' wx:for-item='cast'>{{cast.name}}</view>  
+    </view>
+  </view>
+
+</view>
+
+<view class='font-title-bg font-title-bg-style'>{{title}}</view>

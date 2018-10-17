@@ -122,7 +122,7 @@ Page({
     var prevPage = pages[pages.length - 2];
     var tasks_my = prevPage.data.tasks_my;
     this.data.task.id = tasks_my.length;
-    this.data.task.title = '轮盘';//this.data.task.name.substr(0, 2);
+    this.data.task.title = '罗盘';//this.data.task.name.substr(0, 2);
     tasks_my.push(this.data.task);
     prevPage.setData({
       tasks_my: tasks_my

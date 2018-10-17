@@ -25,7 +25,9 @@ Page({
       items: null,
     },
     task: null,
-    cacheEat: null
+    cacheEat: null,
+    currentItem: null,
+    itemJson: null
   },
 
   /**
@@ -105,7 +107,9 @@ Page({
     const newTask = this.data.newTask;
     this.setData({
       newTask: null,
-      task: newTask
+      task: newTask,
+      currentItem: null,
+      itemJson: null
     })
     if (this.data.task.type == 1 && this.data.task.items == null) {
       // if(this.data.cacheEat == null){
@@ -134,12 +138,37 @@ Page({
       //   });
       // }
     }
+    if (this.data.task.type == 3 && this.data.task.items == null){
+      wx.cloud.callFunction({
+        name: 'movie-list',
+        data: {
+          count: 12
+        }
+      }).then(res => {
+        var resultTask = JSON.parse(res.result);
+        console.log('success', resultTask);
+        var subjects = resultTask.subjects;
+        subjects.forEach((subject) => {
+          subject.name = subject.title
+        });
+        var task = that.data.task;
+        task.items = subjects;
+        that.setData({
+          task: task,
+          cacheMovie: task
+        })
+        that.formatOptions(subjects);
+      }).catch(err => {
+        console.log('error', err);
+      });
+      return;
+    }
     this.initCompass();
   },
 
   initCompass: function () {
     var options = null;
-    if(this.data.task.type = 0){
+    if(this.data.task.type == 1){
       options = this.mkr2options(this.data.task.items);
     }else{
       options = this.data.task.items;
@@ -311,11 +340,27 @@ Page({
   },
 
   gotoDetail: function() {
+    console.log('gotoDetail type', this.data.task.type);
     if(this.data.task.type == 0){
       return;
     }
-    wx.navigateTo({
-      url: '../detail/detail?itemJson='+this.data.itemJson+'&title='+this.data.task.title,
-    })
+    if(this.data.task.type == 1){
+      wx.navigateTo({
+        url: '../detail/detail?itemJson=' + this.data.itemJson + '&title=' + this.data.task.title,
+      })
+    }else if(this.data.task.type == 2){
+      if (this.data.currentItem.problemType == 2){
+        return;
+      }
+      wx.navigateTo({
+        url: '../truth-adventure/index?problemType=' + this.data.currentItem.problemType + '&title=' + this.data.task.title,
+      })
+    }else if(this.data.task.type == 3){
+      wx.navigateTo({
+        url: '../movie-info/index?itemJson=' + this.data.itemJson + '&title=' + this.data.task.title,
+      })
+    }
+
+    
   }
 })

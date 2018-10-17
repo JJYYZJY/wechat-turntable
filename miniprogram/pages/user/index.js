@@ -12,10 +12,9 @@ Page({
 
   onLoad: function() {
     wx.cloud.callFunction({
-        name:'test',
+        name:'movie-list',
         data:{
-          a:2,
-          b:3
+          count:12
         }
     }).then(res => {
       console.log('success', JSON.parse(res.result));

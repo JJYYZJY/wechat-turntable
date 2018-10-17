@@ -30,7 +30,7 @@
       </view>
       <view class='center-layout'>
         <view class='goto-layout' hidden='{{!currentItem.name}}' bindtap='gotoDetail'>
-            <view class='goto-text'>{{currentItem.name}}</view><view hidden='{{task.type == 0}}'><i-icon type="enterinto" color='#FEFFFA' size='20'/></view>
+            <view class='goto-text'>{{currentItem.name}}</view><view hidden='{{task.type == 0 || (task.type == 2 && currentItem.problemType == 2)}}'><i-icon type="enterinto" color='#FEFFFA' size='20'/></view>
         </view>
       </view>
     </view>

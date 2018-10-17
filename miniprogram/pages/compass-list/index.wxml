@@ -1,13 +1,13 @@
 <!--miniprogram/pages/compass-list/index.wxml-->
 <view class='title'>智能推荐</view>
 <view class='weui-flex'>
-  <view class='weui-flex__item goto-layout' wx:for='{{tasks_recommend}}' wx:key='unique' bindtap='selectRecommendTitle' data-index='{{index}}'>
+  <view class='weui-flex__item {{item.type == 10001 ? "type-module-color" : "type-compass-color"}}' wx:for='{{tasks_recommend}}' wx:key='unique' bindtap='selectRecommendTitle' data-index='{{index}}'>
       {{item.name}}
   </view>
 </view>
 <view class='title'>我创建的</view>
 <view class='weui-flex'>
-  <view class='weui-flex__item goto-layout' wx:for='{{tasks_my}}' wx:key='unique' bindtap='selectDiyTitle' data-index='{{index}}' bindlongpress='longClick'>
+  <view class='weui-flex__item type-compass-color' wx:for='{{tasks_my}}' wx:key='unique' bindtap='selectDiyTitle' data-index='{{index}}' bindlongpress='longClick'>
       {{item.name}}
   </view>
 </view>

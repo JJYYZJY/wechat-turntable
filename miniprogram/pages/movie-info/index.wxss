@@ -1,0 +1,29 @@
+/* miniprogram/pages/movie-info/index.wxss */
+.content{
+  padding: 20rpx;
+  color: #FEFFFA;
+}
+
+.title{
+  width: fit-content;
+  margin: 0px auto;
+  align-items: center;
+}
+
+.line-layout{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 60rpx 60rpx;
+}
+
+.label-text{
+  width: 20%;
+  margin-right: 10rpx;
+  font-size: 40rpx;
+}
+
+.info-text{
+  width: 80%;
+  font-size: 30rpx;
+}

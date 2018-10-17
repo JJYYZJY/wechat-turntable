@@ -1,0 +1,12 @@
+<!--miniprogram/pages/truth-adventure/index.wxml-->
+  <view class='title-layout'>
+    {{titles[problemType]}}
+  </view>  
+  <view class='problem-layout'>
+    <view class='problem-text'>
+      {{problem}}
+    </view>
+  </view>
+  <view>
+    <button class='btn-next' bindtap='nextProblem'>开始</button>
+  </view>

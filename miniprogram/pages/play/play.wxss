@@ -44,7 +44,7 @@ page {
 }
 
 .canvas-layout{
-    margin: 20% 4rpx 10% 4rpx;
+    margin: 14% 4rpx 10% 4rpx;
 }
 
 .goto-layout{

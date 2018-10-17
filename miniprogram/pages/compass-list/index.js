@@ -136,7 +136,7 @@ Page({
       },{
         name: '布',
       }]
-      }, {
+    }, {
         type: 0,
         id: 5,
         name: '抛硬币',
@@ -146,19 +146,40 @@ Page({
         }, {
           name: '反面',
         }]
-      }, {
-        type: 0,
+    }, {
+        type: 2,
         id: 6,
         name: '真心话&大冒险',
         title: '游戏',
         items: [{
+          problemType: 0,
           name: '真心话',
         }, {
+          problemType: 1,
           name: '大冒险',
         }, {
+          problemType: 2,
           name: 'PASS',
         }]
-      }];
+    }, {
+        type: 10001,
+        id: 7,
+        name: '真心话题库',
+        title: '游戏',
+        problemType: 0,
+    }, {
+        type: 10001,
+        id: 8,
+        name: '大冒险题库',
+        title: '游戏',
+        problemType: 1,
+    }, {
+      type: 3,
+      id: 9,
+      name: '看哪部经典电影？',
+      title: '电影',
+      items: null
+    }];
     that.setData({
       tasks_recommend: tasks_recommend
     })
@@ -173,15 +194,22 @@ Page({
   selectRecommendTitle: function (event) {
     console.log(event);
     var task = this.data.tasks_recommend[event.currentTarget.dataset.index];
-    var pages = getCurrentPages();
-    var prevPage = pages[pages.length - 2];
-    prevPage.setData({
-      needUpdate: true,
-      newTask: task
-    });
-    wx.navigateBack({
-      delta: 1
-    });
+
+    if(task.type == 10001){
+      wx.navigateTo({
+        url: '../truth-adventure/index?problemType=' + task.problemType + '&title=' + task.title,
+      })
+    }else{
+      var pages = getCurrentPages();
+      var prevPage = pages[pages.length - 2];
+      prevPage.setData({
+        needUpdate: true,
+        newTask: task
+      });
+      wx.navigateBack({
+        delta: 1
+      });
+    }
   },
 
   selectDiyTitle: function (event) {

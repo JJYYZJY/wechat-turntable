@@ -1,0 +1,35 @@
+/* miniprogram/pages/truth-adventure/index.wxss */
+
+.title-layout{
+  color: #FD6592;
+  width: fit-content;
+  height: fit-content;
+  margin: 40rpx auto 80rpx auto;
+  font-size: 44rpx;
+}
+
+.problem-layout{
+  margin: 20rpx;
+  padding: 20rpx;
+  border: 2px solid #FD6592;
+  background-color: #FEFFFA;
+  border-radius: 10px;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;  
+}
+
+.problem-text{
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  align-items: center;
+  color: #FD6592;
+}
+
+.btn-next{
+  margin: 60rpx 20rpx;
+  background-color: #FD6592;
+  color: #FEFFFA;
+}
