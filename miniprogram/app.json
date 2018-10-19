@@ -2,11 +2,11 @@
   "cloud": true,
   "pages": [
     "pages/play/play",
+    "pages/user/index",    
     "pages/truth-adventure/index",
     "pages/compass-list/index",
     "pages/compass-new/index",
     "pages/detail/detail",
-    "pages/user/index",
     "pages/movie-info/index"
   ],
   "window": {

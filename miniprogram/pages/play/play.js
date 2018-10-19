@@ -140,14 +140,13 @@ Page({
     }
     if (this.data.task.type == 3 && this.data.task.items == null){
       wx.cloud.callFunction({
-        name: 'movie-list',
+        name: 'movie-top250',
         data: {
           count: 12
         }
       }).then(res => {
-        var resultTask = JSON.parse(res.result);
-        console.log('success', resultTask);
-        var subjects = resultTask.subjects;
+        console.log(res);
+        var subjects = res.result.data;
         subjects.forEach((subject) => {
           subject.name = subject.title
         });

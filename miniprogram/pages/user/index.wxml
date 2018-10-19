@@ -12,4 +12,6 @@
       </button>
   </view>
 
+  <button bindtap='postDB'>post</button>
+
 </view>

@@ -27,3 +27,8 @@
   width: 80%;
   font-size: 30rpx;
 }
+
+.movie-image{
+  width: 270px;
+  height: 380px;
+}

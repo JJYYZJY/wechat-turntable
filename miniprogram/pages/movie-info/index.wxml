@@ -6,6 +6,10 @@
   </view>
 
   <view class='line-layout'>
+    <image class='movie-image' mode='aspectFit' src='{{item.cloudImageId}}'></image>
+  </view>
+
+  <view class='line-layout'>
     <view class='label-text'>评分:</view>
     <view class='info-text'>{{item.rating.average}}</view>
   </view>
