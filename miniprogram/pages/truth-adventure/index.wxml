@@ -9,4 +9,5 @@
   </view>
   <view>
     <button class='btn-next' bindtap='nextProblem'>开始</button>
+    <button hidden='{{problem == ""}}' class='btn-share' bindtap='gotoShareImage'>分享</button>
   </view>

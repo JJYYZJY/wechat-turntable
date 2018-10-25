@@ -2,7 +2,8 @@
   "cloud": true,
   "pages": [
     "pages/play/play",
-    "pages/user/index",    
+    "pages/share-image/index",
+    "pages/user/index",
     "pages/truth-adventure/index",
     "pages/compass-list/index",
     "pages/compass-new/index",

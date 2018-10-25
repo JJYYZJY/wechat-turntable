@@ -1,0 +1,10 @@
+<!--miniprogram/pages/share-image/index.wxml-->
+<import src="../../libs/loading/loading.wxml"/>
+<template wx:if="{{!imageUrl}}" is="loading1"></template>
+<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>
+<view class='center-layout'>
+  <image class='image-canvas' mode='widthFix' src='{{imageUrl}}'></image>
+</view>
+<view>
+  <button hidden='{{!imageUrl}}' class='save-btn' bindtap='saveCanvasImage'>保存图片</button>
+</view>

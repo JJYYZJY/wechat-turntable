@@ -15,6 +15,12 @@ Page({
     adventureItems: []
   },
 
+  gotoShareImage: function() {
+    wx.navigateTo({
+      url: '../share-image/index?text=' + this.data.problem + '&title=' + this.data.titles[this.data.problemType],
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

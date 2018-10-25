@@ -359,7 +359,11 @@ Page({
         url: '../movie-info/index?itemJson=' + this.data.itemJson + '&title=' + this.data.task.title,
       })
     }
+  },
 
-    
+  gotoShareImage: function() {
+    wx.navigateTo({
+      url: '../share-image/index?text=' + this.data.currentItem.name + '&title=' + this.data.task.name,
+    })
   }
 })

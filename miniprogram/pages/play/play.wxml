@@ -30,7 +30,10 @@
       </view>
       <view class='center-layout'>
         <view class='goto-layout' hidden='{{!currentItem.name}}' bindtap='gotoDetail'>
-            <view class='goto-text'>{{currentItem.name}}</view><view hidden='{{task.type == 0 || (task.type == 2 && currentItem.problemType == 2)}}'><i-icon type="enterinto" color='#FEFFFA' size='20'/></view>
+            <view class='goto-text'>{{currentItem.name}}</view><view hidden='{{task.type == 0 || (task.type == 2 && currentItem.problemType == 2)}}'><i-icon type="enterinto" color='#FEFFFA' size='18'/></view>
+        </view>
+        <view class='goto-share-layout' hidden='{{!currentItem.name}}' bindtap='gotoShareImage'>
+            <view class='goto-share-text'>分享</view>
         </view>
       </view>
     </view>

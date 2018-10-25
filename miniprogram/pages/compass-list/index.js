@@ -99,28 +99,28 @@ Page({
     tasks_recommend = [{
       type: 1,
       id: 0,
-      name: '美食',
+      name: '美食推荐，我要去吃啥？',
       title: '美食',
       title_key: '美食',
       items: null
     }, {
       type: 1,
       id: 1,
-      name: '游玩景点',
+      name: '游玩景点，周末去哪玩？',
       title: '景点',
       title_key: '旅游景点',
       items: null
     }, {
       type: 1,
       id: 2,
-      name: '购物商场',
+      name: '购物商场，去哪里逛街？',
       title: '购物',
       title_key: '综合商场',
       items: null
     }, {
       type: 1,
       id: 3,
-      name: '休闲娱乐',
+      name: '休闲娱乐，去哪放松一下？',
       title: '休闲',
       title_key: '娱乐休闲',
       items: null

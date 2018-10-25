@@ -60,6 +60,20 @@ page {
     box-shadow: 0 1px 1px rgba(0,0,0,.4);
 }
 
+.goto-share-layout{
+    margin-left: 10rpx;
+    padding: 2rpx 15rpx 10rpx 15rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    width:  fit-content;
+    border: 1px solid #FD6592;
+    background-color: #FD6592;
+    border-radius: 10rpx;
+    box-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+
 .goto-text{
     margin-top: 10rpx;
     margin-right: 4rpx;
@@ -67,10 +81,19 @@ page {
     font-size: 28rpx;
 }
 
+.goto-share-text{
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  color: #FEFFFA;
+  font-size: 28rpx;
+}
+
 .center-layout{
   width: fit-content;
   margin: 0px auto;
   align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 
 .canvas-container {

@@ -29,7 +29,13 @@
 }
 
 .btn-next{
-  margin: 60rpx 20rpx;
+  margin: 60rpx 20rpx 20rpx 20rpx;
   background-color: #FD6592;
   color: #FEFFFA;
+}
+
+.btn-share{
+  margin: 20rpx 20rpx;
+  background-color: #FEFFFA;
+  color: #FD6592;
 }
