@@ -34,6 +34,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('onLoad options',options)
+    if(options.source && options.task){
+      this.setData({
+        newTask: JSON.parse(options.task)
+      })
+    }
     // wx.clearStorage();
     console.log('onLoad');
     qqmapsdk = new QQMapWX({

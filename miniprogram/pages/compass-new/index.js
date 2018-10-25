@@ -117,16 +117,34 @@ Page({
       return false;
     }
 
-
     var pages = getCurrentPages();
-    var prevPage = pages[pages.length - 2];
-    var tasks_my = prevPage.data.tasks_my;
+    var tasks_my = null;
+    if (pages.length > 1){
+      var prevPage = pages[pages.length - 2];
+      tasks_my = prevPage.data.tasks_my;
+    }
+    if (tasks_my == null){
+      wx.getStorage({
+        key: 'tasks',
+        success: function (res) {
+          console.log('success', res);
+          tasks_my = res.data;
+        },
+        fail: function (res) {
+          console.log('fail', res);
+        },
+        complete: function (res) {
+          console.log('getStorage tasks', tasks_my);
+        }
+      });
+    }
+    if (tasks_my == null){
+      tasks_my = [];
+    }
     this.data.task.id = tasks_my.length;
     this.data.task.title = '罗盘';//this.data.task.name.substr(0, 2);
     tasks_my.push(this.data.task);
-    prevPage.setData({
-      tasks_my: tasks_my
-    });
+    
     wx.setStorage({
       key: 'tasks',
       data: tasks_my,
@@ -147,9 +165,19 @@ Page({
       console.log('error', err);
     });
 
-    wx.navigateBack({
-      delta:1
-    });
+    if(pages.length > 1){
+      var prevPage2 = pages[pages.length - 2];
+      prevPage2.setData({
+        tasks_my: tasks_my
+      });
+      wx.navigateBack({
+        delta: 1
+      });
+    }else{
+      wx.reLaunch({
+        url: '../play/play?source=newCompass&task='+JSON.stringify(this.data.task),
+      })
+    }
     
   },
 
