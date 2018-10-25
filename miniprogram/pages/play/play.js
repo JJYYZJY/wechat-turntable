@@ -25,7 +25,6 @@ Page({
       items: null,
     },
     task: null,
-    cacheEat: null,
     currentItem: null,
     itemJson: null
   },
@@ -64,7 +63,8 @@ Page({
       this.setData({
         needUpdate: false
       })
-
+    } else if (this.data.task.type == 1 && this.data.task.items == null){
+      this.updateMapCompass(this);
     }
   },
 
@@ -118,57 +118,58 @@ Page({
       itemJson: null
     })
     if (this.data.task.type == 1 && this.data.task.items == null) {
-      // if(this.data.cacheEat == null){
-        wx.authorize({
-          scope: 'scope.userLocation',
-          success: () => {
-            that.setData({
-              isLocaltion: true
-            })
-            if (that.data.task.items) {
-              return;
-            }
-            that.searchMap(this.data.task.title_key);
-            that.getLocationInfo();
-          },
-          fail: () => {
-            that.setData({
-              isLocaltion: false
-            })
-          }
-        })
-        return;
-      // }else{
-      //   this.setData({
-      //     task: this.data.cacheEat
-      //   });
-      // }
+      this.updateMapCompass(this);
+      return;
     }
     if (this.data.task.type == 3 && this.data.task.items == null){
-      wx.cloud.callFunction({
-        name: 'movie-top250',
-        data: {
-          count: 12
-        }
-      }).then(res => {
-        console.log(res);
-        var subjects = res.result.data;
-        subjects.forEach((subject) => {
-          subject.name = subject.title
-        });
-        var task = that.data.task;
-        task.items = subjects;
-        that.setData({
-          task: task,
-          cacheMovie: task
-        })
-        that.formatOptions(subjects);
-      }).catch(err => {
-        console.log('error', err);
-      });
+      this.updateMovieCompass(this);
       return;
     }
     this.initCompass();
+  },
+
+  updateMapCompass: function (that) {
+    wx.authorize({
+      scope: 'scope.userLocation',
+      success: () => {
+        that.setData({
+          isLocaltion: true
+        })
+        if (that.data.task.items) {
+          return;
+        }
+        that.searchMap(that.data.task.title_key);
+        that.getLocationInfo();
+      },
+      fail: () => {
+        that.setData({
+          isLocaltion: false
+        })
+      }
+    })
+  },
+
+  updateMovieCompass: function (that) {
+    wx.cloud.callFunction({
+      name: 'movie-top250',
+      data: {
+        count: 12
+      }
+    }).then(res => {
+      console.log(res);
+      var subjects = res.result.data;
+      subjects.forEach((subject) => {
+        subject.name = subject.title
+      });
+      var task = that.data.task;
+      task.items = subjects;
+      that.setData({
+        task: task
+      })
+      that.formatOptions(subjects);
+    }).catch(err => {
+      console.log('error', err);
+    });
   },
 
   initCompass: function () {
@@ -234,8 +235,7 @@ Page({
         var task = that.data.task;
         task.items = res.data;
         that.setData({
-          task: task,
-          cacheEat: task
+          task: task
         })
         const options = that.mkr2options(res.data);
         console.log(options);
