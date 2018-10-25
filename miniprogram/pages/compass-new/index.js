@@ -97,9 +97,8 @@ Page({
     })
   },
 
-  saveTask: function () {
-    var task = this.data.task;
-    if(task.name == ''){
+  checkTask: function (task) {
+    if (task.name == '') {
       $Message({
         content: '请填写轮盘名称',
         type: 'warning'
@@ -109,7 +108,7 @@ Page({
     var c = task.items.filter(function (item) {
       return item.name == '';
     })
-    if(c.length > 0){
+    if (c.length > 0) {
       $Message({
         content: '请填写选项名称',
         type: 'warning'
@@ -117,6 +116,17 @@ Page({
       return false;
     }
 
+    return true;
+  },
+
+  saveTask: function () {
+    var that = this;
+    var task = this.data.task;
+    if (!this.checkTask(task)){
+      console.warn('checkTask error');
+      return;
+    }
+    
     var pages = getCurrentPages();
     var tasks_my = null;
     if (pages.length > 1){
@@ -135,48 +145,49 @@ Page({
         },
         complete: function (res) {
           console.log('getStorage tasks', tasks_my);
+
+          if (tasks_my == null) {
+            tasks_my = [];
+          }
+          that.data.task.id = tasks_my.length;
+          that.data.task.title = '罗盘';//that.data.task.name.substr(0, 2);
+          tasks_my.push(that.data.task);
+
+          wx.setStorage({
+            key: 'tasks',
+            data: tasks_my,
+            success: function (res) {
+              console.log('setStorage success', res);
+            },
+            fail: function (res) {
+              console.log('setStorage fail', res);
+            }
+          })
+
+          wx.cloud.callFunction({
+            name: 'login',
+            data: that.data.task
+          }).then(res => {
+            console.log('success', JSON.parse(res.result));
+          }).catch(err => {
+            console.log('error', err);
+          });
+
+          if (pages.length > 1) {
+            var prevPage2 = pages[pages.length - 2];
+            prevPage2.setData({
+              tasks_my: tasks_my
+            });
+            wx.navigateBack({
+              delta: 1
+            });
+          } else {
+            wx.reLaunch({
+              url: '../play/play?source=newCompass&task=' + JSON.stringify(that.data.task),
+            })
+          }
         }
       });
-    }
-    if (tasks_my == null){
-      tasks_my = [];
-    }
-    this.data.task.id = tasks_my.length;
-    this.data.task.title = '罗盘';//this.data.task.name.substr(0, 2);
-    tasks_my.push(this.data.task);
-    
-    wx.setStorage({
-      key: 'tasks',
-      data: tasks_my,
-      success: function (res) {
-        console.log('setStorage success',res);
-      },
-      fail: function (res) {
-        console.log('setStorage fail', res);
-      }
-    })
-
-    wx.cloud.callFunction({
-      name: 'login',
-      data: this.data.task
-    }).then(res => {
-      console.log('success', JSON.parse(res.result));
-    }).catch(err => {
-      console.log('error', err);
-    });
-
-    if(pages.length > 1){
-      var prevPage2 = pages[pages.length - 2];
-      prevPage2.setData({
-        tasks_my: tasks_my
-      });
-      wx.navigateBack({
-        delta: 1
-      });
-    }else{
-      wx.reLaunch({
-        url: '../play/play?source=newCompass&task='+JSON.stringify(this.data.task),
-      })
     }
     
   },
