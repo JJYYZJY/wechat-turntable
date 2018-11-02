@@ -30,9 +30,19 @@
   background-color: #FD6592;
 }
 
+.type-compass-color:active{
+  border: 1px solid #FD6592;
+  background-color: rgb(158, 64, 92);
+}
+
 .type-module-color{
   border: 1px solid rgb(253, 149, 101);
   background-color: rgb(253, 149, 101);
+}
+
+.type-module-color:active{
+  border: 1px solid rgb(253, 149, 101);
+  background-color: rgb(172, 102, 70);
 }
 
 .btn-style{
