@@ -2,5 +2,5 @@
   "usingComponents": {
     "i-message": "../../dist/message/index"
   },
-  "disableScroll": true
+  "disableScroll": false
 }

@@ -8,3 +8,4 @@
 <view>
   <button hidden='{{!imageUrl}}' class='save-btn' bindtap='saveCanvasImage'>保存图片</button>
 </view>
+<i-message id="message" />

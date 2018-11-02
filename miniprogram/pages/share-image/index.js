@@ -1,4 +1,5 @@
 // miniprogram/pages/share-image/index.js
+const { $Message } = require('../../dist/base/index');
 const db = wx.cloud.database();
 
 Page({
@@ -22,6 +23,10 @@ Page({
       filePath: this.data.imageUrl,
       success: function (res) {
         console.log('success', res);
+        $Message({
+          content: '保存成功，已保存到手机相册',
+          type: 'success'
+        });
       },
       fail: function (res) {
         console.log('fail', res);

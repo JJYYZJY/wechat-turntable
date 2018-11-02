@@ -3,5 +3,5 @@
     "i-action-sheet": "../../dist/action-sheet/index",
     "i-message": "../../dist/message/index"
   },
-  "disableScroll": true
+  "disableScroll": false
 }

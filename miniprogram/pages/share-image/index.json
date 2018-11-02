@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "canvasdrawer": "/libs/canvasdrawer/canvasdrawer"
+    "canvasdrawer": "/libs/canvasdrawer/canvasdrawer",
+    "i-message": "../../dist/message/index"
   },
-  "disableScroll": true
+  "disableScroll": false
 }
