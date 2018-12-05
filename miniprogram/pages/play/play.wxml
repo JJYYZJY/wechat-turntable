@@ -1,4 +1,9 @@
 <!--miniprogram/pages/play/play.wxml-->
+<view hidden='{{!pushMessage}}'>
+  <i-notice-bar icon="systemprompt">
+      {{pushMessage}}
+  </i-notice-bar>
+</view>
 <view>
   <view>
     <view wx:if='{{isLocaltion}}'>

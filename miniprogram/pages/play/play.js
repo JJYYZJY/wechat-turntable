@@ -26,7 +26,8 @@ Page({
     },
     task: null,
     currentItem: null,
-    itemJson: null
+    itemJson: null,
+    pushMessage: null
   },
 
   /**
@@ -50,7 +51,13 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    const db = wx.cloud.database();
+    db.collection('push-message').get().then(res => {
+      console.log('push-message', res);
+      this.setData({
+        pushMessage:res.data[0].message
+      });
+    })
   },
 
   /**

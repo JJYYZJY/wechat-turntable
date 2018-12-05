@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "i-icon": "../../dist/icon/index"
+    "i-icon": "../../dist/icon/index",
+    "i-notice-bar": "../../dist/notice-bar/index"
   },
   "disableScroll": false
 }
