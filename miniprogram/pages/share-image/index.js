@@ -166,19 +166,20 @@ Page({
    */
   onReady: function () {
     var that = this;
-
-    db.collection('acode-images').where({
-      name: 'acode-small-ai'
-    }).get().then(res => {
-      console.log('acode result ', res);
-      wx.cloud.downloadFile({
-        fileID: res.data[0].url,
-        success: function (res) {
-          console.log('getTempFileURL', res);
-          that.drawImage(that.data.title, that.data.text, res.tempFilePath)
-        }
-      });
-    })
+    var acode_tempFileUrl = '../../image/eat_code.jpg';
+    that.drawImage(that.data.title, that.data.text, acode_tempFileUrl)
+    // db.collection('acode-images').where({
+    //   name: 'acode-small-ai'
+    // }).get().then(res => {
+    //   console.log('acode result ', res);
+    //   wx.cloud.downloadFile({
+    //     fileID: res.data[0].url,
+    //     success: function (res) {
+    //       console.log('getTempFileURL', res);
+    //       that.drawImage(that.data.title, that.data.text, res.tempFilePath)
+    //     }
+    //   });
+    // })
   },
 
   /**

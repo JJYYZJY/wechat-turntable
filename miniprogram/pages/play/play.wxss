@@ -332,8 +332,8 @@ page {
   border-radius: 50%;
   color: #FEFFFA;
   background-color: rgb(219, 88, 127);
-  line-height: 48px;
-  font-size: 20px;
+  line-height: 100rpx;
+  font-size: 40rpx;
   box-shadow: 0 3px 5px rgba(0,0,0,.6);
   
 }

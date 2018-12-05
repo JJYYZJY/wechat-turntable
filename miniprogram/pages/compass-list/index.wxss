@@ -35,6 +35,16 @@
   background-color: rgb(158, 64, 92);
 }
 
+.type-compass-hot-color{
+  border: 1px solid rgb(253, 101, 220);
+  background-color: rgb(253, 101, 220);
+}
+
+.type-compass-hot-color:active{
+  border: 1px solid rgb(253, 101, 220);
+  background-color: rgb(145, 60, 126);
+}
+
 .type-module-color{
   border: 1px solid rgb(253, 149, 101);
   background-color: rgb(253, 149, 101);

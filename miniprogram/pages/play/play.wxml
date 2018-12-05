@@ -2,8 +2,8 @@
 <view>
   <view>
     <view wx:if='{{isLocaltion}}'>
-      <view class='location-layout'>
-        <i-icon type="coordinates" color='#FEFFFA' size='20' /><view class='location-text'>{{localName == null ? localMsg: localName}}</view>
+      <view class='location-layout' hidden='{{task.type != 1}}'>
+        <i-icon type="coordinates" color='#FEFFFA' size='20' /><view class='location-text'>{{localName == null ? localMsg: "定位成功"}}</view>
       </view>
       <view class='compass-name-layout'>{{task.name}}</view>
       <view class='canvas-layout'>
@@ -30,7 +30,7 @@
       </view>
       <view class='center-layout'>
         <view class='goto-layout' hidden='{{!currentItem.name}}' bindtap='gotoDetail'>
-            <view class='goto-text'>{{currentItem.name}}</view><view hidden='{{task.type == 0 || (task.type == 2 && currentItem.problemType == 2)}}'><i-icon type="enterinto" color='#FEFFFA' size='18'/></view>
+            <view class='goto-text'>{{currentItem.name}}</view><view hidden='{{task.type == 0|| task.type == 88888 || (task.type == 2 && currentItem.problemType == 2)}}'><i-icon type="enterinto" color='#FEFFFA' size='18'/></view>
         </view>
         <view class='goto-share-layout' hidden='{{!currentItem.name}}' bindtap='gotoShareImage'>
             <view class='goto-share-text'>分享</view>

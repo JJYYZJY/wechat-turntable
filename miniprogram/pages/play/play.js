@@ -346,7 +346,7 @@ Page({
 
   gotoDetail: function() {
     console.log('gotoDetail type', this.data.task.type);
-    if(this.data.task.type == 0){
+    if (this.data.task.type == 0 || this.data.task.type == 88888){
       return;
     }
     if(this.data.task.type == 1){

@@ -1,7 +1,7 @@
 <!--miniprogram/pages/compass-list/index.wxml-->
 <view class='title'>智能推荐</view>
 <view class='weui-flex'>
-  <view class='weui-flex__item {{item.type == 10001 ? "type-module-color" : "type-compass-color"}}' wx:for='{{tasks_recommend}}' wx:key='unique' bindtap='selectRecommendTitle' data-index='{{index}}'>
+  <view class='weui-flex__item {{item.type == 10001 ? "type-module-color" : item.type == 88888 ? "type-compass-hot-color" : "type-compass-color"}}' wx:for='{{tasks_recommend}}' wx:key='unique' bindtap='selectRecommendTitle' data-index='{{index}}'>
       {{item.name}}
   </view>
 </view>
